@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>醫學教育共識營 – 創造 360 度人生｜一頁式問卷</title>
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="醫學教育共識營 – 創造 360 度人生｜問卷調查" />
+<meta property="og:description" content="2025 醫學教育共識營問卷調查。一頁完成：前測、後測、滿意度。" />
+<meta property="og:image" content="" />
+
+<style>
+:root { 
+    /* 依據 456.jpg 提取的配色 (深藍紫、亮紫、白) */
+    --bg1: #1e1b4b; /* 深靛藍 */
+    --bg2: #312e81; /* 靛青色 */
+    --primary: #8b5cf6; /* 亮紫色 (對應海報中的亮色塊) */
+    --primary-hover: #7c3aed;
+    --accent: #a78bfa; /* 淺紫色 */
+    --text: #f8fafc; /* 幾乎白色 */
+    
+    --card-bg: rgba(30, 27, 75, 0.6); /* 深藍半透明背景 */
+    --card-border: rgba(139, 92, 246, 0.3); /* 紫色邊框 */
+    
+    --input-bg: rgba(255, 255, 255, 0.1);
+    --input-border: rgba(167, 139, 250, 0.4);
+    
+    --pill-active-bg: #8b5cf6;
+    --pill-active-border: #a78bfa;
+    --pill-active-text: #ffffff;
+    
+    --submit-bg: linear-gradient(135deg, #6d28d9, #4f46e5); /* 紫到藍漸層 */
+    --submit-text: #ffffff;
+}
+
+body { 
+    margin:0; 
+    font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; 
+    color:var(--text); 
+    background:
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.2), transparent 50%),
+        radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.2), transparent 50%),
+        linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%); /* 深邃夜空藍紫漸層 */
+    background-size: cover;
+    background-attachment: fixed;
+    min-height:100vh; 
+    line-height: 1.6;
+}
+
+.container { max-width:900px; margin:0 auto; padding:24px; }
+.hero-grid { display:flex; flex-direction:column; gap:20px; margin-top:16px; }
+
+/* 海報圖片樣式 - 調整為適配 456.jpg (直式) */
+.poster-container {
+  width: 100%;
+  max-width: 400px; /* 直式海報限制寬度，避免太高 */
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(49, 46, 129, 0.4);
+  border: 1px solid var(--card-border);
+}
+.poster-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.hero-card { border-radius:20px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.4); position:relative; }
+
+.hero-card.hero-info { 
+    background: rgba(30, 27, 75, 0.7);
+    backdrop-filter: blur(12px);
+    padding:28px; 
+    color:#f8fafc; 
+    border:1px solid var(--card-border);
+    text-align: center; /* 置中對齊 */
+}
+/* 光暈動畫 */
+.hero-card.hero-info::before { 
+    content:""; 
+    position:absolute; 
+    inset:-20%; 
+    background:radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15), transparent 60%); 
+    animation:pulseGlow 6s ease-in-out infinite; 
+    z-index:0; 
+}
+.hero-card.hero-info > * { position:relative; z-index:2; }
+
+h1 { 
+    font-size:32px; 
+    margin:0 0 12px 0; 
+    letter-spacing:1px; 
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.badge { 
+    display:inline-block; 
+    background:rgba(139, 92, 246, 0.3); 
+    color:#e0e7ff; 
+    padding:4px 12px; 
+    border-radius:999px; 
+    font-size:13px; 
+    letter-spacing:.5px; 
+    border:1px solid rgba(139, 92, 246, 0.5); 
+    margin-bottom: 12px;
+}
+
+.hero-subtitle { margin:0; font-size:16px; line-height:1.6; color:#cbd5e1; }
+
+.card { 
+    background: var(--card-bg);
+    border-radius:16px; 
+    padding:24px; 
+    margin:20px 0; 
+    box-shadow:0 10px 30px rgba(0,0,0,.3); 
+    border:1px solid var(--card-border); 
+    backdrop-filter:blur(10px); 
+    color:#f8fafc; 
+}
+.section-title { 
+    font-weight:700; 
+    font-size:20px; 
+    margin:0 0 16px 0; 
+    color: #a78bfa; /* 淺紫色標題 */
+    border-bottom: 1px solid rgba(167, 139, 250, 0.3); 
+    padding-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px 20px; }
+
+label { display:block; font-weight:600; margin-bottom:8px; color: #e0e7ff; }
+
+select, input[type="text"], textarea, input[type="number"] { 
+    width:100%; 
+    border:1px solid var(--input-border); 
+    border-radius:10px; 
+    padding:12px; 
+    font-size:15px; 
+    outline:none; 
+    background: var(--input-bg);
+    color: #fff;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+select:focus, input:focus, textarea:focus {
+    border-color: var(--primary);
+    background: rgba(255,255,255,0.15);
+}
+select option { background: #1e1b4b; color: #fff; }
+
+/* Likert Scale Styles */
+.likert { display:flex; gap:8px; flex-wrap:wrap; }
+.pill { 
+    padding:10px 10px; 
+    border:1px solid var(--input-border); 
+    border-radius:8px; 
+    cursor:pointer; 
+    user-select:none; 
+    transition:all .2s;
+    font-size: 14px;
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+}
+.pill input { display:none; }
+.pill:hover { background: rgba(139, 92, 246, 0.2); }
+.pill.active { 
+    background: var(--pill-active-bg); 
+    border-color: var(--pill-active-border); 
+    color: var(--pill-active-text);
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+    transform: scale(1.05);
+}
+
+/* Checkbox & Radio Custom Styles */
+.checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+.checkbox-label {
+    display: flex; align-items: center; gap: 12px; cursor: pointer;
+    padding: 10px 16px; border-radius: 8px; border: 1px solid var(--input-border);
+    background: var(--input-bg); transition: all 0.2s;
+}
+.checkbox-label:hover { background: rgba(255,255,255,0.15); }
+.checkbox-label input[type="checkbox"], .checkbox-label input[type="radio"] {
+    appearance: none; width: 20px; height: 20px; border: 2px solid #a78bfa; border-radius: 4px;
+    display: grid; place-content: center; margin: 0;
+}
+.checkbox-label input[type="radio"] { border-radius: 50%; }
+.checkbox-label input[type="checkbox"]::before, .checkbox-label input[type="radio"]::before {
+    content: ""; width: 10px; height: 10px; transform: scale(0); transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--primary);
+    transform-origin: center;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%); /* Checkmark */
+}
+.checkbox-label input[type="radio"]::before { clip-path: circle(50%); background: var(--primary); }
+.checkbox-label input:checked::before { transform: scale(1); }
+.checkbox-label input:checked { border-color: var(--primary); }
+
+.submit { 
+    display:block; 
+    width: 100%;
+    background: var(--submit-bg); 
+    color: var(--submit-text); 
+    border:0; 
+    padding:16px; 
+    border-radius:12px; 
+    font-weight:700; 
+    font-size: 18px;
+    cursor:pointer; 
+    margin-top:24px; 
+    box-shadow:0 10px 20px rgba(79, 70, 229, 0.4); 
+    transition: all .3s;
+}
+.submit:hover { transform: translateY(-2px); box-shadow:0 15px 30px rgba(79, 70, 229, 0.6); }
+.submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.note { font-size:14px; color:#cbd5e1; margin-top: -8px; margin-bottom: 16px; font-style: italic; }
+
+/* Toggle Tabs */
+.toggle { 
+    display:flex; justify-content: center; gap: 8px; 
+    background:rgba(0,0,0,.3); padding:8px; border-radius:16px; 
+    border: 1px solid var(--card-border); margin: 24px auto; 
+    max-width: 600px; 
+}
+.toggle button { 
+    flex: 1;
+    border:0; 
+    padding:12px; 
+    border-radius:10px; 
+    background:transparent; 
+    font-weight:600; 
+    cursor:pointer; 
+    color:#a5b4fc; 
+    transition: all .2s;
+    font-size: 16px;
+}
+.toggle button:hover { color: #fff; background: rgba(255,255,255,0.05); }
+.toggle button.active { 
+    background: var(--primary); 
+    color: #fff; 
+    box-shadow:0 4px 15px rgba(139, 92, 246, 0.4); 
+}
+
+/* Sub-group Cards */
+.sub-group-grid { display:grid; gap: 24px; margin-top: 16px; margin-bottom: 24px; }
+.sub-group-card {
+    background: rgba(0,0,0, 0.2);
+    border-radius:12px; 
+    padding:20px; 
+    border:1px solid rgba(255,255,255, 0.05);
+}
+.sub-group-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 0 0 16px 0;
+    color: #c4b5fd; /* 柔和紫標題 */
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    padding-bottom: 8px;
+}
+.likert-item { margin-bottom: 24px; }
+.likert-item:last-child { margin-bottom: 0; }
+.likert-item label { margin-bottom: 10px; line-height: 1.5; color: #f1f5f9; font-weight: 500; font-size: 16px; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: all .3s; z-index: 100;
+}
+.modal-overlay.visible { opacity: 1; visibility: visible; }
+.modal-content {
+  background: #1e1b4b;
+  border: 1px solid var(--primary);
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%; max-width: 400px;
+  box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+  transform: scale(0.9); transition: all .3s;
+  text-align: center;
+  color: #fff;
+}
+.modal-overlay.visible .modal-content { transform: scale(1); }
+.modal-content h2 { margin: 0 0 12px 0; color: var(--primary); font-size: 24px; }
+.modal-content button {
+  background: var(--primary); color: #fff; border: 0; padding: 10px 24px;
+  border-radius: 99px; font-weight: 700; cursor: pointer; margin-top: 24px;
+  font-size: 16px;
+}
+
+footer { text-align:center; padding:40px 0 20px; font-size:14px; color:rgba(255,255,255,0.5); }
+
+@keyframes pulseGlow {
+  0% { opacity:0.4; transform: scale(1); }
+  50% { opacity:0.7; transform: scale(1.02); }
+  100% { opacity:0.4; transform: scale(1); }
+}
+
+/* RWD */
+@media (max-width:600px) {
+  .container { padding:16px; }
+  h1 { font-size:26px; }
+  .toggle { flex-direction: column; gap: 4px; }
+  .likert .pill { padding: 12px 6px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal-content">
+    <h2 id="modal-title">提示</h2>
+    <p id="modal-message">訊息內容</p>
+    <button id="modal-close">確定</button>
+  </div>
+</div>
+
+<div class="container">
+  <div class="hero-grid">
+    <!-- 海報圖片區域 (請確保 456.jpg 在同一目錄下) -->
+    <div class="poster-container">
+      <img src="456.jpg" alt="教學共識營海報" class="poster-image">
+    </div>
+    
+    <div class="hero-card hero-info">
+      <div class="badge">Teaching Consensus Camp</div>
+      <h1>醫學教育共識營<br>創造 360° 人生</h1>
+      <p class="hero-subtitle">全人・適性・創新｜2025.11.23 奇美博物館</p>
+    </div>
+  </div>
+
+  <!-- 隱私聲明 -->
+  <div class="card">
+    <div class="section-title">隱私權聲明</div>
+    <p class="note">本問卷採匿名方式進行，資料僅供教學品質改善與學術研究分析使用。</p>
+    <label class="checkbox-label" style="background: rgba(139, 92, 246, 0.1); border-color: var(--primary);">
+      <input type="checkbox" id="consent">
+      <span>我已閱讀並同意參與調查</span>
+    </label>
+  </div>
+
+  <!-- 基本資料 (所有問卷共用) -->
+  <div class="card">
+    <div class="section-title">基本資料 (Basic Info)</div>
+    <div class="grid" style="grid-template-columns: 1fr;">
+      <!-- 1. 角色 (複選) -->
+      <div>
+        <label>1. 您的角色（可複選）</label>
+        <div class="checkbox-group" id="role-group">
+            <label class="checkbox-label"><input type="checkbox" name="role" value="主治醫師"> 主治醫師</label>
+            <label class="checkbox-label"><input type="checkbox" name="role" value="住院/總醫師"> 住院 / 總醫師</label>
+            <label class="checkbox-label"><input type="checkbox" name="role" value="護理/專師"> 護理 / 專師</label>
+            <label class="checkbox-label"><input type="checkbox" name="role" value="教學部/主任/主管"> 教學部 / 主任 / 主管</label>
+            <label class="checkbox-label"><input type="checkbox" name="role" value="行政/資訊/其他跨部門人員"> 行政 / 資訊 / 其他跨部門人員</label>
+            <label class="checkbox-label">
+                <input type="checkbox" name="role" value="other" id="role-other-cb"> 其他：
+                <input type="text" id="role-other-text" placeholder="請填寫" style="width: auto; padding: 6px; margin-left: 8px; flex: 1;">
+            </label>
+        </div>
+      </div>
+
+      <!-- 2. 經驗 (單選) -->
+      <div style="margin-top: 16px;">
+        <label>2. 是否曾參與院級醫學教育相關活動？</label>
+        <div style="display: flex; gap: 16px;">
+            <label class="checkbox-label" style="flex:1;">
+                <input type="radio" name="has_experience" value="是"> 是
+            </label>
+            <label class="checkbox-label" style="flex:1;">
+                <input type="radio" name="has_experience" value="否"> 否
+            </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 切換按鈕 -->
+  <div class="toggle">
+    <button id="btn-pre" class="active">前測問卷 (Pre-test)</button>
+    <button id="btn-post">後測問卷 (Post-test)</button>
+    <button id="btn-sat">滿意度 (Satisfaction)</button>
+  </div>
+
+  <!-- A. 前測問卷 -->
+  <div class="card" id="pre-test-card">
+    <div class="section-title">前測問卷 (Pre-test)</div>
+    <p class="note">請依照您目前的真實想法填寫 (1=非常不同意, 5=非常同意)</p>
+    
+    <div id="pre-likert-container"></div>
+    
+    <div class="sub-group-card" style="margin-top: 24px;">
+        <h3>開放式問題</h3>
+        <label>18. 您最希望本次共識營能討論或解決的議題是什麼？</label>
+        <textarea id="pre-open-1" rows="3"></textarea>
+        
+        <label style="margin-top: 16px;">19. 您認為目前醫院醫學教育最需要改進的面向是？</label>
+        <textarea id="pre-open-2" rows="3"></textarea>
+
+        <label style="margin-top: 16px;">20. 若您能為醫院醫學教育設定一個「北極星」，會是什麼？</label>
+        <textarea id="pre-open-3" rows="3"></textarea>
+    </div>
+    
+    <button class="submit" id="submit-btn-pre" onclick="submitSurvey('pre')">提交前測問卷</button>
+  </div>
+
+  <!-- B. 後測問卷 -->
+  <div class="card" id="post-test-card" style="display:none;">
+    <div class="section-title">後測問卷 (Post-test)</div>
+    <p class="note">活動結束後填寫 (1=非常不同意, 5=非常同意)</p>
+    
+    <div id="post-likert-container"></div>
+    
+    <div class="sub-group-card" style="margin-top: 24px;">
+        <h3>開放式回饋</h3>
+        <label>16. 您覺得本次活動讓您最有收穫的內容是什麼？</label>
+        <textarea id="post-open-1" rows="3"></textarea>
+
+        <label style="margin-top: 16px;">17. 您希望未來共識營或醫學教育活動新增哪些主題？</label>
+        <textarea id="post-open-2" rows="3"></textarea>
+        
+        <label style="margin-top: 16px;">18. 活動中有什麼部分值得改進？</label>
+        <textarea id="post-open-3" rows="3"></textarea>
+    </div>
+    
+    <button class="submit" id="submit-btn-post" onclick="submitSurvey('post')">提交後測問卷</button>
+  </div>
+
+  <!-- C. 滿意度問卷 -->
+  <div class="card" id="satisfaction-card" style="display:none;">
+    <div class="section-title">滿意度問卷 (Satisfaction)</div>
+    <p class="note">請給予我們回饋 (1=非常不滿意, 5=非常滿意)</p>
+    
+    <div id="sat-likert-container"></div>
+    
+    <div class="sub-group-card" style="margin-top: 24px;">
+        <h3>滿意度開放式回饋</h3>
+        <label>16. 您最喜歡本活動的哪一部分？</label>
+        <textarea id="sat-open-1" rows="3"></textarea>
+
+        <label style="margin-top: 16px;">17. 您認為活動中最需要改進的是？</label>
+        <textarea id="sat-open-2" rows="3"></textarea>
+
+        <label style="margin-top: 16px;">18. 若明年再辦，您最希望加入哪些主題？</label>
+        <textarea id="sat-open-3" rows="3"></textarea>
+    </div>
+    
+    <button class="submit" id="submit-btn-sat" onclick="submitSurvey('sat')">提交滿意度問卷</button>
+  </div>
+
+  <footer>© 2025 奇美醫院醫學教育共識營 Chi Mei Medical Center</footer>
+</div>
+
+<script>
+/* ---------------------------------- */
+/* UI 控制 */
+/* ---------------------------------- */
+const modalOverlay = document.getElementById('modal-overlay');
+const modalTitle = document.getElementById('modal-title');
+const modalMessage = document.getElementById('modal-message');
+const modalClose = document.getElementById('modal-close');
+
+function showModal(title, message) {
+  modalTitle.textContent = title;
+  modalMessage.textContent = message;
+  modalOverlay.classList.add('visible');
+}
+function hideModal() { modalOverlay.classList.remove('visible'); }
+modalClose.onclick = hideModal;
+modalOverlay.onclick = (e) => { if (e.target === modalOverlay) hideModal(); };
+
+const btnPre = document.getElementById("btn-pre");
+const btnPost = document.getElementById("btn-post");
+const btnSat = document.getElementById("btn-sat");
+const cards = {
+    pre: document.getElementById("pre-test-card"),
+    post: document.getElementById("post-test-card"),
+    sat: document.getElementById("satisfaction-card")
+};
+
+function switchTab(tabName) {
+    Object.values(cards).forEach(c => c.style.display = "none");
+    [btnPre, btnPost, btnSat].forEach(b => b.classList.remove("active"));
+
+    cards[tabName].style.display = "block";
+    if(tabName === 'pre') btnPre.classList.add("active");
+    if(tabName === 'post') btnPost.classList.add("active");
+    if(tabName === 'sat') btnSat.classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+btnPre.onclick = () => switchTab('pre');
+btnPost.onclick = () => switchTab('post');
+btnSat.onclick = () => switchTab('sat');
+
+/* ---------------------------------- */
+/* 問卷題目資料 (依據 Word) */
+/* ---------------------------------- */
+
+const PRE_TEST_GROUPS = [
+  {
+    title: "參與動機與期待",
+    startIndex: 3,
+    items: [
+      "我期待透過本次共識營獲得具體可用的醫學教育知識或方法。",
+      "我關心如何提升本科的教學品質。",
+      "我希望更了解醫院教學型主治醫師與各功能小組的未來規劃。",
+      "我對醫院醫學教育「北極星」與未來方向目前仍不夠清楚。（反向題）"
+    ]
+  },
+  {
+    title: "自我效能 (Bandura)",
+    startIndex: 7,
+    items: [
+      "我能理解並運用活動中所介紹的教學概念與方法。",
+      "我覺得自己目前具備推展教學相關活動的能力。",
+      "我希望能獲得更多跨部門協助以強化教學成效。"
+    ]
+  },
+  {
+    title: "組織變革準備度 (ORCA)",
+    startIndex: 10,
+    items: [
+      "我認同醫院目前推動醫學教育、人文、數位賦能、教學品質的改革方向。",
+      "我覺得我所在單位的主管與團隊對教學創新持支持態度。",
+      "我所在單位願意採納新的教學策略或跨部門合作模式。"
+    ]
+  },
+  {
+    title: "醫學教育知識現況",
+    startIndex: 13,
+    items: [
+      "我了解 CBME 的基本概念與評量方式。",
+      "我了解 教學型主治醫師的角色與能力框架。",
+      "我了解 醫學人文教育的核心內涵。",
+      "我了解 數位賦能工具在教學中的應用。",
+      "我了解 教學品質與評鑑條文的重點。"
+    ]
+  }
+];
+
+const POST_TEST_GROUPS = [
+  {
+    title: "學習收穫",
+    startIndex: 1,
+    items: [
+      "我更清楚醫院醫學教育的北極星與整體方向。",
+      "我理解醫學人文、數位賦能、CBME、教學品質的整合策略。",
+      "我學到可立即運用於教學現場的技巧或方法。",
+      "我對功能小組的定位與未來任務更加清晰。"
+    ]
+  },
+  {
+    title: "反思與視角轉化 (Mezirow)",
+    startIndex: 5,
+    items: [
+      "本次活動促使我重新思考自己的教學角色與定位。",
+      "活動讓我反思既有的教學或帶教方式。",
+      "我對醫學教育在醫院文化中的重要性有更深理解。"
+    ]
+  },
+  {
+    title: "行為改變意向 (Level 3)",
+    startIndex: 8,
+    items: [
+      "我有信心能把今天的內容運用在臨床教學場景。",
+      "我願意採用新的教學法或跨部門協作方式。",
+      "若有資源，我願意參與或協助院級教學計畫/功能小組。"
+    ]
+  },
+  {
+    title: "組織變革準備度 (ORCA) - Post",
+    startIndex: 11,
+    items: [
+      "我相信單位同仁會支持我推動新的教學或改善措施。",
+      "我認為醫院目前具備推進教學文化的良好氛圍。",
+      "我願意成為推動醫院醫學教育改善的一份子。"
+    ]
+  },
+  {
+    title: "組織認同 (Level 4)",
+    startIndex: 14,
+    items: [
+      "本次共識營讓我對醫院使命與文化的認同更深。",
+      "我願意向他人推薦參與醫院的醫學教育活動。"
+    ]
+  }
+];
+
+const SATISFACTION_GROUPS = [
+  {
+    title: "整體滿意度",
+    startIndex: 1,
+    items: [
+      "活動流程與整體安排",
+      "講者內容的深度與實用性",
+      "活動對我教學工作的幫助程度",
+      "活動的互動性與參與感",
+      "活動場地、時間與行政安排"
+    ]
+  },
+  {
+    title: "按議程內容評估",
+    startIndex: 6,
+    items: [
+      "「奇美醫教北極星」說明的清晰度與啟發性",
+      "「多元韌性」內容的實用性",
+      "教學型主治醫師的分享對我有具體價值",
+      "醫學人文、數位賦能、師培、CBME 成果回顧的資訊豐富性",
+      "分組討論的實用性與促進思考程度"
+    ]
+  },
+  {
+    title: "成人學習需求 (Knowles)",
+    startIndex: 11,
+    items: [
+      "活動內容符合我的臨床/教學需求。",
+      "活動提供了可立即應用的工具或方法。",
+      "活動鼓勵參與者分享經驗與交流。"
+    ]
+  },
+  {
+    title: "心理安全與合作",
+    startIndex: 14,
+    items: [
+      "活動促進我與其他單位/部門的連結。",
+      "活動提供安全、開放的討論空間。"
+    ]
+  }
+];
+
+/* ---------------------------------- */
+/* 渲染函式 */
+/* ---------------------------------- */
+function renderGroupedLikert(containerId, groups, prefix) {
+  const container = document.getElementById(containerId);
+  const groupGrid = document.createElement('div');
+  groupGrid.className = "sub-group-grid";
+  container.appendChild(groupGrid);
+
+  groups.forEach(group => {
+    const groupCard = document.createElement('div');
+    groupCard.className = "sub-group-card";
+    
+    const title = document.createElement('h3');
+    title.textContent = group.title;
+    groupCard.appendChild(title);
+
+    group.items.forEach((text, idx) => {
+      const questionNumber = group.startIndex + idx;
+      
+      const row = document.createElement('div');
+      row.className = "likert-item";
+      
+      const label = document.createElement('label');
+      label.textContent = `${questionNumber}. ${text}`; 
+      row.appendChild(label);
+
+      const likertScale = document.createElement('div');
+      likertScale.className = "likert";
+      
+      const radioName = `${prefix}_${questionNumber}`;
+      
+      ["1","2","3","4","5"].forEach(value => {
+        const pill = document.createElement('label');
+        pill.className = "pill";
+        
+        const input = document.createElement('input');
+        input.type = "radio";
+        input.name = radioName;
+        input.value = value;
+
+        pill.appendChild(input);
+        pill.appendChild(document.createTextNode(value));
+
+        pill.addEventListener("click", () => {
+          const siblings = row.querySelectorAll('.pill');
+          siblings.forEach(s => s.classList.remove('active'));
+          pill.classList.add('active');
+          input.checked = true;
+        });
+
+        likertScale.appendChild(pill);
+      });
+
+      row.appendChild(likertScale);
+      groupCard.appendChild(row);
+    });
+    
+    groupGrid.appendChild(groupCard);
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    renderGroupedLikert("pre-likert-container", PRE_TEST_GROUPS, "pre");
+    renderGroupedLikert("post-likert-container", POST_TEST_GROUPS, "post");
+    renderGroupedLikert("sat-likert-container", SATISFACTION_GROUPS, "sat");
+});
+
+
+/* ---------------------------------- */
+/* 提交邏輯 */
+/* ---------------------------------- */
+// 請注意：這已經是您指定的最新 Web App URL
+const DEPLOYED_URL = "https://script.google.com/macros/s/AKfycbwQY6QMj34zckV6_OVd4RdnI4GsEZaZLtIwKf8UbSaExiW2HUwYPfq3LxdFysmjmuIZ/exec";
+
+function getRadioValue(name) {
+    const el = document.querySelector(`input[name="${name}"]:checked`);
+    return el ? el.value : "";
+}
+
+function getCheckboxValues(name) {
+    const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+    let values = Array.from(checkboxes).map(cb => cb.value);
+    
+    // 處理"其他"
+    if(values.includes('other')) {
+        const otherText = document.getElementById('role-other-text').value.trim();
+        values = values.filter(v => v !== 'other');
+        if(otherText) values.push(`其他:${otherText}`);
+    }
+    return values.join(", ");
+}
+
+function validateLikert(groups, prefix) {
+    const missing = [];
+    groups.forEach(group => {
+        group.items.forEach((_, idx) => {
+            const qNum = group.startIndex + idx;
+            if (!getRadioValue(`${prefix}_${qNum}`)) {
+                missing.push(qNum);
+            }
+        });
+    });
+    return missing;
+}
+
+async function submitSurvey(type) {
+    // 1. 隱私同意檢查
+    if (!document.getElementById("consent").checked) {
+        showModal("提醒", "請先勾選「我已閱讀並同意參與調查」。");
+        return;
+    }
+    
+    // 2. 基本資料檢查
+    const role = getCheckboxValues("role");
+    const exp = getRadioValue("has_experience");
+
+    if (!role || !exp) {
+        showModal("提醒", "請先完成上方「基本資料」所有欄位。");
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+    }
+
+    // 3. 準備資料 Payload
+    let payload = {
+        timestamp: new Date().toISOString(),
+        role: role,
+        experience: exp
+    };
+
+    let groups = [];
+    let prefix = "";
+    let openIds = [];
+    
+    if (type === 'pre') {
+        payload.surveyName = "共識營前測";
+        groups = PRE_TEST_GROUPS;
+        prefix = "pre";
+        openIds = ["pre-open-1", "pre-open-2", "pre-open-3"];
+    } else if (type === 'post') {
+        payload.surveyName = "共識營後測";
+        groups = POST_TEST_GROUPS;
+        prefix = "post";
+        openIds = ["post-open-1", "post-open-2", "post-open-3"];
+    } else if (type === 'sat') {
+        payload.surveyName = "共識營滿意度";
+        groups = SATISFACTION_GROUPS;
+        prefix = "sat";
+        openIds = ["sat-open-1", "sat-open-2", "sat-open-3"];
+    }
+
+    // 4. 驗證 Likert 必填
+    const missing = validateLikert(groups, prefix);
+    if (missing.length > 0) {
+        showModal("未完成", `第 ${missing.join(", ")} 題尚未填寫，請檢查。`);
+        return;
+    }
+
+    // 5. 收集 Likert 資料
+    groups.forEach(group => {
+        group.items.forEach((_, idx) => {
+            const qNum = group.startIndex + idx;
+            payload[`${prefix}_${qNum}`] = getRadioValue(`${prefix}_${qNum}`);
+        });
+    });
+
+    // 6. 收集開放式問題
+    openIds.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if(el) payload[`open_${prefix}_${idx+1}`] = el.value.replace(/\n/g, " ");
+    });
+
+    console.log("Ready to send:", payload);
+
+    // 7. 傳送
+    const btn = document.getElementById(`submit-btn-${type}`);
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = "傳送中...";
+
+    try {
+        await fetch(DEPLOYED_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(payload),
+            headers: { "Content-Type": "application/json" }
+        });
+        
+        showModal("提交成功", "您的回饋已送出，感謝您的參與！");
+        btn.textContent = "已提交";
+        
+        // 自動引導到下一階段
+        if(type === 'pre') {
+            setTimeout(() => { switchTab('post'); }, 2000);
+        } else if(type === 'post') {
+            setTimeout(() => { switchTab('sat'); }, 2000);
+        }
+
+    } catch (e) {
+        console.error(e);
+        showModal("錯誤", "提交失敗，請檢查網路連線。");
+        btn.disabled = false;
+        btn.textContent = originalText;
+    }
+}
+</script>
+</body>
+</html>
