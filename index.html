@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>醫學教育共識營 – 創造 360 度人生｜一頁式問卷</title>
+<title>醫學教育共識營 – 創造 360 度人生｜課後回饋與滿意度</title>
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:title" content="醫學教育共識營 – 創造 360 度人生｜問卷調查" />
-<meta property="og:description" content="2025 醫學教育共識營問卷調查。一頁完成：前測、後測、滿意度。" />
+<meta property="og:title" content="醫學教育共識營 – 創造 360 度人生｜回饋與滿意度" />
+<meta property="og:description" content="感謝您的參與，請填寫回饋讓我們做得更好。" />
 <meta property="og:image" content="" />
 
 <style>
@@ -16,7 +16,7 @@
     /* 依據 456.jpg 提取的配色 (深藍紫、亮紫、白) */
     --bg1: #1e1b4b; /* 深靛藍 */
     --bg2: #312e81; /* 靛青色 */
-    --primary: #8b5cf6; /* 亮紫色 (對應海報中的亮色塊) */
+    --primary: #8b5cf6; /* 亮紫色 */
     --primary-hover: #7c3aed;
     --accent: #a78bfa; /* 淺紫色 */
     --text: #f8fafc; /* 幾乎白色 */
@@ -48,7 +48,7 @@ body {
 
 .container { max-width:900px; margin:0 auto; padding:24px; }
 
-/* 主視覺區域 - 單一卡片 */
+/* 主視覺區域 */
 .hero-grid { 
     margin-top: 16px;
 }
@@ -118,7 +118,7 @@ h1 {
     font-weight:700; 
     font-size:20px; 
     margin:0 0 16px 0; 
-    color: #a78bfa; /* 淺紫色標題 */
+    color: #a78bfa; 
     border-bottom: 1px solid rgba(167, 139, 250, 0.3); 
     padding-bottom: 12px;
     display: flex;
@@ -220,32 +220,6 @@ select option { background: #1e1b4b; color: #fff; }
 
 .note { font-size:14px; color:#cbd5e1; margin-top: -8px; margin-bottom: 16px; font-style: italic; }
 
-/* Toggle Tabs */
-.toggle { 
-    display:flex; justify-content: center; gap: 8px; 
-    background:rgba(0,0,0,.3); padding:8px; border-radius:16px; 
-    border: 1px solid var(--card-border); margin: 24px auto; 
-    max-width: 600px; 
-}
-.toggle button { 
-    flex: 1;
-    border:0; 
-    padding:12px; 
-    border-radius:10px; 
-    background:transparent; 
-    font-weight:600; 
-    cursor:pointer; 
-    color:#a5b4fc; 
-    transition: all .2s;
-    font-size: 16px;
-}
-.toggle button:hover { color: #fff; background: rgba(255,255,255,0.05); }
-.toggle button.active { 
-    background: var(--primary); 
-    color: #fff; 
-    box-shadow:0 4px 15px rgba(139, 92, 246, 0.4); 
-}
-
 /* Sub-group Cards */
 .sub-group-grid { display:grid; gap: 24px; margin-top: 16px; margin-bottom: 24px; }
 .sub-group-card {
@@ -258,7 +232,7 @@ select option { background: #1e1b4b; color: #fff; }
     font-size: 17px;
     font-weight: 700;
     margin: 0 0 16px 0;
-    color: #c4b5fd; /* 柔和紫標題 */
+    color: #c4b5fd; 
     border-bottom: 1px dashed rgba(255,255,255,0.1);
     padding-bottom: 8px;
 }
@@ -306,7 +280,6 @@ footer { text-align:center; padding:40px 0 20px; font-size:14px; color:rgba(255,
 @media (max-width:600px) {
   .container { padding:16px; }
   h1 { font-size:26px; }
-  .toggle { flex-direction: column; gap: 4px; }
   .likert .pill { padding: 12px 6px; font-size: 13px; }
   .hero-card.hero-info {
     padding: 36px 20px;
@@ -380,78 +353,36 @@ footer { text-align:center; padding:40px 0 20px; font-size:14px; color:rgba(255,
     </div>
   </div>
 
-  <!-- 切換按鈕 -->
-  <div class="toggle">
-    <button id="btn-pre" class="active">前測問卷 (Pre-test)</button>
-    <button id="btn-post">後測問卷 (Post-test)</button>
-    <button id="btn-sat">滿意度 (Satisfaction)</button>
-  </div>
-
-  <!-- A. 前測問卷 -->
-  <div class="card" id="pre-test-card">
-    <div class="section-title">前測問卷 (Pre-test)</div>
-    <p class="note">請依照您目前的真實想法填寫 (1=非常不同意, 5=非常同意)</p>
-    
-    <div id="pre-likert-container"></div>
-    
-    <div class="sub-group-card" style="margin-top: 24px;">
-        <h3>開放式問題</h3>
-        <label>18. 您最希望本次共識營能討論或解決的議題是什麼？</label>
-        <textarea id="pre-open-1" rows="3"></textarea>
-        
-        <label style="margin-top: 16px;">19. 您認為目前醫院醫學教育最需要改進的面向是？</label>
-        <textarea id="pre-open-2" rows="3"></textarea>
-
-        <label style="margin-top: 16px;">20. 若您能為醫院醫學教育設定一個「北極星」，會是什麼？</label>
-        <textarea id="pre-open-3" rows="3"></textarea>
-    </div>
-    
-    <button class="submit" id="submit-btn-pre" onclick="submitSurvey('pre')">提交前測問卷</button>
-  </div>
-
-  <!-- B. 後測問卷 -->
-  <div class="card" id="post-test-card" style="display:none;">
-    <div class="section-title">後測問卷 (Post-test)</div>
+  <!-- 整合問卷區域 -->
+  <div class="card">
+    <div class="section-title">第一部分：後測問卷 (Post-test)</div>
     <p class="note">活動結束後填寫 (1=非常不同意, 5=非常同意)</p>
     
+    <!-- 後測題目 -->
     <div id="post-likert-container"></div>
-    
-    <div class="sub-group-card" style="margin-top: 24px;">
-        <h3>開放式回饋</h3>
-        <label>16. 您覺得本次活動讓您最有收穫的內容是什麼？</label>
-        <textarea id="post-open-1" rows="3"></textarea>
-
-        <label style="margin-top: 16px;">17. 您希望未來共識營或醫學教育活動新增哪些主題？</label>
-        <textarea id="post-open-2" rows="3"></textarea>
-        
-        <label style="margin-top: 16px;">18. 活動中有什麼部分值得改進？</label>
-        <textarea id="post-open-3" rows="3"></textarea>
-    </div>
-    
-    <button class="submit" id="submit-btn-post" onclick="submitSurvey('post')">提交後測問卷</button>
   </div>
 
-  <!-- C. 滿意度問卷 -->
-  <div class="card" id="satisfaction-card" style="display:none;">
-    <div class="section-title">滿意度問卷 (Satisfaction)</div>
+  <div class="card">
+    <div class="section-title">第二部分：滿意度與綜合回饋 (Satisfaction)</div>
     <p class="note">請給予我們回饋 (1=非常不滿意, 5=非常滿意)</p>
     
+    <!-- 滿意度題目 -->
     <div id="sat-likert-container"></div>
     
     <div class="sub-group-card" style="margin-top: 24px;">
-        <h3>滿意度開放式回饋</h3>
-        <label>16. 您最喜歡本活動的哪一部分？</label>
-        <textarea id="sat-open-1" rows="3"></textarea>
+        <h3>綜合開放式回饋</h3>
+        <label>14. 您覺得本次活動讓您最有收穫或最喜歡的內容是什麼？</label>
+        <textarea id="sat-open-1" rows="3" placeholder="請輸入..."></textarea>
 
-        <label style="margin-top: 16px;">17. 您認為活動中最需要改進的是？</label>
-        <textarea id="sat-open-2" rows="3"></textarea>
+        <label style="margin-top: 16px;">15. 您認為活動中有什麼部分值得改進？</label>
+        <textarea id="sat-open-2" rows="3" placeholder="請輸入..."></textarea>
 
-        <label style="margin-top: 16px;">18. 若明年再辦，您最希望加入哪些主題？</label>
-        <textarea id="sat-open-3" rows="3"></textarea>
+        <label style="margin-top: 16px;">16. 您希望未來共識營或醫學教育活動新增哪些主題？</label>
+        <textarea id="sat-open-3" rows="3" placeholder="請輸入..."></textarea>
     </div>
-    
-    <button class="submit" id="submit-btn-sat" onclick="submitSurvey('sat')">提交滿意度問卷</button>
   </div>
+    
+  <button class="submit" id="submit-btn" onclick="submitCombinedSurvey()">提交完整問卷</button>
 
   <footer>© 2025 奇美醫院醫學教育共識營 Chi Mei Medical Center</footer>
 </div>
@@ -474,75 +405,10 @@ function hideModal() { modalOverlay.classList.remove('visible'); }
 modalClose.onclick = hideModal;
 modalOverlay.onclick = (e) => { if (e.target === modalOverlay) hideModal(); };
 
-const btnPre = document.getElementById("btn-pre");
-const btnPost = document.getElementById("btn-post");
-const btnSat = document.getElementById("btn-sat");
-const cards = {
-    pre: document.getElementById("pre-test-card"),
-    post: document.getElementById("post-test-card"),
-    sat: document.getElementById("satisfaction-card")
-};
-
-function switchTab(tabName) {
-    Object.values(cards).forEach(c => c.style.display = "none");
-    [btnPre, btnPost, btnSat].forEach(b => b.classList.remove("active"));
-
-    cards[tabName].style.display = "block";
-    if(tabName === 'pre') btnPre.classList.add("active");
-    if(tabName === 'post') btnPost.classList.add("active");
-    if(tabName === 'sat') btnSat.classList.add("active");
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-btnPre.onclick = () => switchTab('pre');
-btnPost.onclick = () => switchTab('post');
-btnSat.onclick = () => switchTab('sat');
 
 /* ---------------------------------- */
-/* 問卷題目資料 (依據 Word) */
+/* 問卷題目資料 */
 /* ---------------------------------- */
-
-const PRE_TEST_GROUPS = [
-  {
-    title: "參與動機與期待",
-    startIndex: 3,
-    items: [
-      "我期待透過本次共識營獲得具體可用的醫學教育知識或方法。",
-      "我關心如何提升本科的教學品質。",
-      "我希望更了解醫院教學型主治醫師與各功能小組的未來規劃。",
-      "我對醫院醫學教育「北極星」與未來方向目前仍不夠清楚。（反向題）"
-    ]
-  },
-  {
-    title: "自我效能 (Bandura)",
-    startIndex: 7,
-    items: [
-      "我能理解並運用活動中所介紹的教學概念與方法。",
-      "我覺得自己目前具備推展教學相關活動的能力。",
-      "我希望能獲得更多跨部門協助以強化教學成效。"
-    ]
-  },
-  {
-    title: "組織變革準備度 (ORCA)",
-    startIndex: 10,
-    items: [
-      "我認同醫院目前推動醫學教育、人文、數位賦能、教學品質的改革方向。",
-      "我覺得我所在單位的主管與團隊對教學創新持支持態度。",
-      "我所在單位願意採納新的教學策略或跨部門合作模式。"
-    ]
-  },
-  {
-    title: "醫學教育知識現況",
-    startIndex: 13,
-    items: [
-      "我了解 CBME 的基本概念與評量方式。",
-      "我了解 教學型主治醫師的角色與能力框架。",
-      "我了解 醫學人文教育的核心內涵。",
-      "我了解 數位賦能工具在教學中的應用。",
-      "我了解 教學品質與評鑑條文的重點。"
-    ]
-  }
-];
 
 const POST_TEST_GROUPS = [
   {
@@ -592,6 +458,7 @@ const POST_TEST_GROUPS = [
   }
 ];
 
+// 已刪除第3題(幫助程度)和第12題(提供工具)，剩餘13題
 const SATISFACTION_GROUPS = [
   {
     title: "整體滿意度",
@@ -599,14 +466,14 @@ const SATISFACTION_GROUPS = [
     items: [
       "活動流程與整體安排",
       "講者內容的深度與實用性",
-      "活動對我教學工作的幫助程度",
+      // 原第3題「幫助程度」已刪除 (重複後測#3)
       "活動的互動性與參與感",
       "活動場地、時間與行政安排"
     ]
   },
   {
     title: "按議程內容評估",
-    startIndex: 6,
+    startIndex: 5, // 重新編號
     items: [
       "「奇美醫教北極星」說明的清晰度與啟發性",
       "「多元韌性」內容的實用性",
@@ -617,16 +484,16 @@ const SATISFACTION_GROUPS = [
   },
   {
     title: "成人學習需求 (Knowles)",
-    startIndex: 11,
+    startIndex: 10, // 重新編號
     items: [
       "活動內容符合我的臨床/教學需求。",
-      "活動提供了可立即應用的工具或方法。",
+      // 原第12題「提供應用工具」已刪除 (重複後測#3)
       "活動鼓勵參與者分享經驗與交流。"
     ]
   },
   {
     title: "心理安全與合作",
-    startIndex: 14,
+    startIndex: 12, // 重新編號
     items: [
       "活動促進我與其他單位/部門的連結。",
       "活動提供安全、開放的討論空間。"
@@ -697,7 +564,6 @@ function renderGroupedLikert(containerId, groups, prefix) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderGroupedLikert("pre-likert-container", PRE_TEST_GROUPS, "pre");
     renderGroupedLikert("post-likert-container", POST_TEST_GROUPS, "post");
     renderGroupedLikert("sat-likert-container", SATISFACTION_GROUPS, "sat");
 });
@@ -706,8 +572,8 @@ document.addEventListener('DOMContentLoaded', () => {
 /* ---------------------------------- */
 /* 提交邏輯 */
 /* ---------------------------------- */
-// 請注意：這已經是您指定的最新 Web App URL
-const DEPLOYED_URL = "https://script.google.com/macros/s/AKfycbwQY6QMj34zckV6_OVd4RdnI4GsEZaZLtIwKf8UbSaExiW2HUwYPfq3LxdFysmjmuIZ/exec";
+// 您最新的 GAS 網址
+const DEPLOYED_URL = "https://script.google.com/macros/s/AKfycbzL6Ec3viC9WMoAr-0DBJd1b0-CAz5sH2JOgCY5xO-Zv4RGXMzZfM9SjkkvmHkVIp4vcg/exec";
 
 function getRadioValue(name) {
     const el = document.querySelector(`input[name="${name}"]:checked`);
@@ -733,14 +599,14 @@ function validateLikert(groups, prefix) {
         group.items.forEach((_, idx) => {
             const qNum = group.startIndex + idx;
             if (!getRadioValue(`${prefix}_${qNum}`)) {
-                missing.push(qNum);
+                missing.push(`${prefix === 'post' ? '後測' : '滿意度'} 第${qNum}題`);
             }
         });
     });
     return missing;
 }
 
-async function submitSurvey(type) {
+async function submitCombinedSurvey() {
     // 1. 隱私同意檢查
     if (!document.getElementById("consent").checked) {
         showModal("提醒", "請先勾選「我已閱讀並同意參與調查」。");
@@ -757,59 +623,49 @@ async function submitSurvey(type) {
         return;
     }
 
-    // 3. 準備資料 Payload
+    // 3. 檢查 Likert 必填
+    const missingPost = validateLikert(POST_TEST_GROUPS, "post");
+    const missingSat = validateLikert(SATISFACTION_GROUPS, "sat");
+    
+    const allMissing = [...missingPost, ...missingSat];
+
+    if (allMissing.length > 0) {
+        showModal("未完成", `尚有題目未填寫：\n${allMissing.slice(0, 3).join(", ")}${allMissing.length > 3 ? '...等' : ''}`);
+        return;
+    }
+
+    // 4. 準備資料 Payload
     let payload = {
         timestamp: new Date().toISOString(),
+        surveyName: "共識營後測+滿意度", // 識別名稱
         role: role,
         experience: exp
     };
 
-    let groups = [];
-    let prefix = "";
-    let openIds = [];
-    
-    if (type === 'pre') {
-        payload.surveyName = "共識營前測";
-        groups = PRE_TEST_GROUPS;
-        prefix = "pre";
-        openIds = ["pre-open-1", "pre-open-2", "pre-open-3"];
-    } else if (type === 'post') {
-        payload.surveyName = "共識營後測";
-        groups = POST_TEST_GROUPS;
-        prefix = "post";
-        openIds = ["post-open-1", "post-open-2", "post-open-3"];
-    } else if (type === 'sat') {
-        payload.surveyName = "共識營滿意度";
-        groups = SATISFACTION_GROUPS;
-        prefix = "sat";
-        openIds = ["sat-open-1", "sat-open-2", "sat-open-3"];
-    }
-
-    // 4. 驗證 Likert 必填
-    const missing = validateLikert(groups, prefix);
-    if (missing.length > 0) {
-        showModal("未完成", `第 ${missing.join(", ")} 題尚未填寫，請檢查。`);
-        return;
-    }
-
-    // 5. 收集 Likert 資料
-    groups.forEach(group => {
+    // 收集後測 Likert (post_1 ~ post_15)
+    POST_TEST_GROUPS.forEach(group => {
         group.items.forEach((_, idx) => {
             const qNum = group.startIndex + idx;
-            payload[`${prefix}_${qNum}`] = getRadioValue(`${prefix}_${qNum}`);
+            payload[`post_${qNum}`] = getRadioValue(`post_${qNum}`);
         });
     });
 
-    // 6. 收集開放式問題
-    openIds.forEach((id, idx) => {
-        const el = document.getElementById(id);
-        if(el) payload[`open_${prefix}_${idx+1}`] = el.value.replace(/\n/g, " ");
+    // 收集滿意度 Likert (sat_1 ~ sat_13)
+    SATISFACTION_GROUPS.forEach(group => {
+        group.items.forEach((_, idx) => {
+            const qNum = group.startIndex + idx;
+            payload[`sat_${qNum}`] = getRadioValue(`sat_${qNum}`);
+        });
     });
+    // 收集綜合開放式回饋 (14-16)
+    payload[`open_sat_1`] = document.getElementById("sat-open-1").value.replace(/\n/g, " ");
+    payload[`open_sat_2`] = document.getElementById("sat-open-2").value.replace(/\n/g, " ");
+    payload[`open_sat_3`] = document.getElementById("sat-open-3").value.replace(/\n/g, " ");
 
-    console.log("Ready to send:", payload);
+    console.log("Sending:", payload);
 
-    // 7. 傳送
-    const btn = document.getElementById(`submit-btn-${type}`);
+    // 5. 傳送
+    const btn = document.getElementById("submit-btn");
     const originalText = btn.textContent;
     btn.disabled = true;
     btn.textContent = "傳送中...";
@@ -819,22 +675,15 @@ async function submitSurvey(type) {
             method: "POST",
             mode: "no-cors",
             body: JSON.stringify(payload),
-            headers: { "Content-Type": "application/json" }
+            headers: { "Content-Type": "text/plain" }
         });
         
-        showModal("提交成功", "您的回饋已送出，感謝您的參與！");
-        btn.textContent = "已提交";
-        
-        // 自動引導到下一階段
-        if(type === 'pre') {
-            setTimeout(() => { switchTab('post'); }, 2000);
-        } else if(type === 'post') {
-            setTimeout(() => { switchTab('sat'); }, 2000);
-        }
+        showModal("提交成功", "您的回饋與滿意度已送出，非常感謝您的參與！");
+        btn.textContent = "問卷已提交";
 
     } catch (e) {
         console.error(e);
-        showModal("錯誤", "提交失敗，請檢查網路連線。");
+        showModal("錯誤", "提交失敗，請檢查網路連線或稍後再試。");
         btn.disabled = false;
         btn.textContent = originalText;
     }
