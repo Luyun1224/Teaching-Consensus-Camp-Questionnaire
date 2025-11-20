@@ -21,11 +21,11 @@
     --accent: #a78bfa; /* 淺紫色 */
     --text: #f8fafc; /* 幾乎白色 */
     
-    --card-bg: rgba(30, 27, 75, 0.6); /* 深藍半透明背景 */
-    --card-border: rgba(139, 92, 246, 0.3); /* 紫色邊框 */
+    --card-bg: rgba(30, 27, 75, 0.35); /* 更透明的深藍半透明背景 */
+    --card-border: rgba(139, 92, 246, 0.25); /* 更淡的紫色邊框 */
     
-    --input-bg: rgba(255, 255, 255, 0.1);
-    --input-border: rgba(167, 139, 250, 0.4);
+    --input-bg: rgba(255, 255, 255, 0.08);
+    --input-border: rgba(167, 139, 250, 0.3);
     
     --pill-active-bg: #8b5cf6;
     --pill-active-border: #a78bfa;
@@ -40,43 +40,35 @@ body {
     font-family:-apple-system,BlinkMacSystemFont,"Noto Sans TC","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif; 
     color:var(--text); 
     background:
-        radial-gradient(circle at top right, rgba(139, 92, 246, 0.2), transparent 50%),
-        radial-gradient(circle at bottom left, rgba(79, 70, 229, 0.2), transparent 50%),
-        linear-gradient(180deg, #0f0c29 0%, #302b63 50%, #24243e 100%); /* 深邃夜空藍紫漸層 */
-    background-size: cover;
-    background-attachment: fixed;
+        linear-gradient(rgba(15, 12, 41, 0.75), rgba(36, 36, 62, 0.75)),
+        url('456.jpg') center/cover fixed;
     min-height:100vh; 
     line-height: 1.6;
 }
 
 .container { max-width:900px; margin:0 auto; padding:24px; }
-.hero-grid { display:flex; flex-direction:column; gap:20px; margin-top:16px; }
 
-/* 海報圖片樣式 - 調整為適配 456.jpg (直式) */
-.poster-container {
-  width: 100%;
-  max-width: 400px; /* 直式海報限制寬度，避免太高 */
-  margin: 0 auto;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(49, 46, 129, 0.4);
-  border: 1px solid var(--card-border);
-}
-.poster-image {
-  width: 100%;
-  height: auto;
-  display: block;
+/* 主視覺區域 - 單一卡片 */
+.hero-grid { 
+    margin-top: 16px;
 }
 
 .hero-card { border-radius:20px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.4); position:relative; }
 
 .hero-card.hero-info { 
-    background: rgba(30, 27, 75, 0.7);
+    background: 
+        linear-gradient(rgba(30, 27, 75, 0.85), rgba(30, 27, 75, 0.85)),
+        url('許文龍.jpg') center/cover;
     backdrop-filter: blur(12px);
-    padding:28px; 
+    padding:48px 28px; 
     color:#f8fafc; 
     border:1px solid var(--card-border);
-    text-align: center; /* 置中對齊 */
+    text-align: center;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 /* 光暈動畫 */
 .hero-card.hero-info::before { 
@@ -316,6 +308,10 @@ footer { text-align:center; padding:40px 0 20px; font-size:14px; color:rgba(255,
   h1 { font-size:26px; }
   .toggle { flex-direction: column; gap: 4px; }
   .likert .pill { padding: 12px 6px; font-size: 13px; }
+  .hero-card.hero-info {
+    padding: 36px 20px;
+    min-height: 200px;
+  }
 }
 </style>
 </head>
@@ -332,11 +328,6 @@ footer { text-align:center; padding:40px 0 20px; font-size:14px; color:rgba(255,
 
 <div class="container">
   <div class="hero-grid">
-    <!-- 海報圖片區域 (請確保 456.jpg 在同一目錄下) -->
-    <div class="poster-container">
-      <img src="456.jpg" alt="教學共識營海報" class="poster-image">
-    </div>
-    
     <div class="hero-card hero-info">
       <div class="badge">Teaching Consensus Camp</div>
       <h1>醫學教育共識營<br>創造 360° 人生</h1>
